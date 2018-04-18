@@ -107,7 +107,7 @@ app.get('/api/users/:id/snippets', (req, res) => {
   knex('users').join('snippets','users.id','snippets.user_id')
     .where('users.id',id)
     .orderBy('created','desc')
-    .select('snippet','username','name','created').then(snippets => {
+    .select('snippet','username','created').then(snippets => {
       res.status(200).json({snippets:snippets});
     }).catch(error => {
       res.status(500).json({ error });
@@ -129,6 +129,17 @@ app.post('/api/users/:id/snippets',verifyToken,(req, res) => {
     return;
   }).catch(error => {
     console.log(error);
+    res.status(500).json({ error });
+  });
+});
+
+app.delete('/api/users/:id/snippets', (req, res) => {
+  console.log("hihihi");
+  let id = parseInt(req.params.id);
+  console.log(id);
+  knex('snippets').where('user_id',id).del().then(user => {
+    res.status(200).json({user:user});
+  }).catch(error => {
     res.status(500).json({ error });
   });
 });

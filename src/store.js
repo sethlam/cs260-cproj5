@@ -126,6 +126,14 @@ initialize(context) {
   	    	}).catch(err => {
   	    		console.log("addTweet failed:",err);
   	    	});
+  	    },
+  	    delAll(context) {
+  	    	console.log(context.state.user.id);
+  	    	axios.delete("/api/users/" + context.state.user.id + "/snippets").then(response => {
+  	    		return context.dispatch('getFeed');
+  	    	}).catch(err => {
+  	    		console.log("addTweet failed:",err);
+  	    	});
   	    }
 
 

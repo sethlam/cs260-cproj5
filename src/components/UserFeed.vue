@@ -16,6 +16,7 @@
 	  <button class="primary" type="submit">Add Snippet</button>
 	</div>
       </form>
+      <button class="primary" v-on:click="delAll()">Delete All Code</button>
     </div>
   </div>
   <a href
@@ -66,6 +67,15 @@
    methods: {
      tweet: function() {
        this.$store.dispatch('addTweet',{
+         tweet: 'To ' + this.codeName+', use this code "' + this.text + '"',
+       }).then(tweet => {
+   this.text = "";
+   this.codeName = "";
+       });
+     },
+     delAll: function() {
+     console.log("HIHI");
+        this.$store.dispatch('delAll',{
          tweet: 'To ' + this.codeName+', use this code "' + this.text + '"',
        }).then(tweet => {
    this.text = "";

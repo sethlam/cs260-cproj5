@@ -1,7 +1,6 @@
 <template>
   <nav>
     <ul class="background" id="menu">
-      <li><router-link to="/">Home</router-link></li>
       <li class="right" v-if="loggedIn"><a @click="logout" href="#">Logout</a></li>
       <li class="right" v-if="loggedIn">{{user.username}}</li>
       <form v-else class="right" v-on:submit.prevent="login">
